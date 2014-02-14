@@ -1,0 +1,22 @@
+{
+  "name": "autobind",
+  "version": "0.0.0",
+  "description": "A JavaScript microlibrary for automatic event binding",
+  "devDependencies": {
+    "mycha": "latest"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mycha run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kevgo/autobind.git"
+  },
+  "author": "Kevin Goslar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevgo/autobind/issues"
+  },
+  "homepage": "https://github.com/kevgo/autobind"
+}
