@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-coffee": "latest",
+    "grunt-contrib-uglify": "latest",
     "mycha": "latest"
   },
   "main": "index.js",
