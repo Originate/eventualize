@@ -4,12 +4,13 @@ _Eventualizes your code until it experiences the ultimate eventualization_
 
 Eventualize is a JavaScript microlibrary that introduces a
 convention-over-configuration pattern so that jQuery-compatible events
-are automatically bound to the right event handlers in your JavaScript code.
+are automatically bound to properly named event handlers
+in your JavaScript code.
 
 This means it makes the right "on" calls on your class members to subscribe
 the matching event handlers for you automatically.
 All you have to do is
-* declare your class a child of Eventualize
+* let your class inherit from Eventualize
 * name your event handlers appropriately
 * tell your class to eventualize itself
 
@@ -73,3 +74,14 @@ class Mailer extends Eventualize
   # Called when the SMTP gateway fires the 'error' event.
   @on_smtp_gateway_error = (err, message) ->
 ```
+
+
+## Development
+
+* make a feature request: open an issue on the Github page
+* praise or feedback: https://github.com/kevgo
+* set up dev environment: `npm install`
+* run tests: `npm test`
+* compile a new release: `grunt release`
+* contribute some changes: unit-tested pull requests please!  :)
+
