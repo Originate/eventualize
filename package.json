@@ -9,7 +9,7 @@
     "grunt-contrib-uglify": "latest",
     "mycha": "latest"
   },
-  "main": "index.js",
+  "main": "lib/eventualize.min.js",
   "scripts": {
     "test": "mycha run --reporter spec"
   },
