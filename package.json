@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mycha run"
+    "test": "mycha run --reporter spec"
   },
   "repository": {
     "type": "git",
