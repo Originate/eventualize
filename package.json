@@ -1,5 +1,5 @@
 {
-  "name": "autobind",
+  "name": "eventualize",
   "version": "0.0.0",
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:kevgo/autobind.git"
+    "url": "git@github.com:kevgo/eventualize.git"
   },
   "author": "Kevin Goslar",
   "license": "MIT",

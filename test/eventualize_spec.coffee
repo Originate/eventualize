@@ -1,11 +1,11 @@
 # For testing browser-side export behavior.
 global.window = {}
 
-Autobind = require '../src/autobind'
+Eventualize = require '../src/eventualize'
 
 
 # Helper class for testing.
-class ButtonClickTester extends Autobind
+class ButtonClickTester extends Eventualize
 
   constructor: ->
 
@@ -20,16 +20,16 @@ class ButtonClickTester extends Autobind
   other_method: ->
 
 
-describe 'Autobind', ->
+describe 'Eventualize', ->
 
   beforeEach ->
     @button_click_tester = new ButtonClickTester()
 
 
-  describe 'autobind', ->
+  describe 'eventualize', ->
 
     beforeEach ->
-      @button_click_tester.autobind()
+      @button_click_tester.eventualize()
 
     it 'binds events according to their name', ->
       expect(@button_click_tester.button.on).to.have.been.calledWith 'click',
@@ -42,7 +42,7 @@ describe 'Autobind', ->
   describe 'callback_event_name', ->
 
     beforeEach ->
-      @result = Autobind.callback_event_name 'on_button_click', 'button'
+      @result = Eventualize.callback_event_name 'on_button_click', 'button'
 
     it 'returns the name of the event that the given callback listens to', ->
       expect(@result).to.equal 'click'
@@ -66,42 +66,42 @@ describe 'Autobind', ->
   describe 'is_callback_method', ->
 
     it 'returns TRUE for callback methods', ->
-      expect(Autobind.is_callback_method 'on_foo_click').to.be.true
+      expect(Eventualize.is_callback_method 'on_foo_click').to.be.true
 
     it 'returns FALSE for methods that are not callbacks', ->
-      expect(Autobind.is_callback_method 'foo_bar').to.be.false
+      expect(Eventualize.is_callback_method 'foo_bar').to.be.false
 
 
   describe 'is_callback_for', ->
 
     it 'returns TRUE if the given method name is for a callback for the given element', ->
-      expect(Autobind.is_callback_for 'on_button_', 'button').to.be.true
+      expect(Eventualize.is_callback_for 'on_button_', 'button').to.be.true
 
     it 'returns FALSE if the given method name is a callback for a different element', ->
-      expect(Autobind.is_callback_for 'on_foo_', 'button').to.be.false
+      expect(Eventualize.is_callback_for 'on_foo_', 'button').to.be.false
 
 
 describe 'starts_with', ->
 
   it 'returns TRUE if the given string starts with the given string', ->
-    expect(Autobind.string_starts_with 'one two three', 'one').to.be.true
+    expect(Eventualize.string_starts_with 'one two three', 'one').to.be.true
 
   it 'returns TRUE if the given string is equal to the given string', ->
-    expect(Autobind.string_starts_with 'one', 'one').to.be.true
+    expect(Eventualize.string_starts_with 'one', 'one').to.be.true
 
   it 'returns false if the given string does not start with the given string', ->
-    expect(Autobind.string_starts_with 'one two three', 'two').to.be.false
+    expect(Eventualize.string_starts_with 'one two three', 'two').to.be.false
 
   it 'returns false if the given string does not start with the given string', ->
-    expect(Autobind.string_starts_with 'on', 'one').to.be.false
+    expect(Eventualize.string_starts_with 'on', 'one').to.be.false
 
 
 describe 'exporting', ->
 
-  it 'exports the Autobind class as a Node module', ->
-    expect(Autobind).to.not.be.undefined
+  it 'exports the Eventualize class as a Node module', ->
+    expect(Eventualize).to.not.be.undefined
 
-  it "exports the Autobind class to the browser's window object", ->
-    expect(window.Autobind).to.not.be.undefined
+  it "exports the Eventualize class to the browser's window object", ->
+    expect(window.Eventualize).to.not.be.undefined
 
 

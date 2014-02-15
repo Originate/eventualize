@@ -1,15 +1,15 @@
 
 # Provides autobinding to a class.
-class Autobind
+class Eventualize
 
   # Automatically binds all events fired by properties of this class
   # to their corresponding "on_[property name]_[method name]" methods.
-  autobind: ->
+  eventualize: ->
     [fields, callbacks] = @categorize_members()
     for field in fields
       for callback in callbacks
-        if Autobind.is_callback_for callback, field
-          @[field].on Autobind.callback_event_name(callback, field),
+        if Eventualize.is_callback_for callback, field
+          @[field].on Eventualize.callback_event_name(callback, field),
                       @[callback]
 
     # Prevent inefficient JavaScript.
@@ -27,7 +27,7 @@ class Autobind
         when 'object'
           fields.push element
         when 'function'
-          callbacks.push element if Autobind.is_callback_method element
+          callbacks.push element if Eventualize.is_callback_method element
     [fields, callbacks]
 
 
@@ -53,5 +53,5 @@ class Autobind
 
 
 
-module?.exports = Autobind
-window?.Autobind = Autobind
+module?.exports = Eventualize
+window?.Eventualize = Eventualize
