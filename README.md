@@ -1,24 +1,23 @@
 # Eventualize [![Build Status](https://travis-ci.org/kevgo/eventualize.png?branch=master)](https://travis-ci.org/kevgo/eventualize)
 
-_Eventualizes your code until it experiences the ultimate eventualization_
+_Eventualizes your code until it achieves the ultimate eventualization_
 
 Eventualize is a JavaScript microlibrary that introduces a
 convention-over-configuration pattern so that jQuery-compatible events
 are automatically bound to properly named event handlers
-in your JavaScript code.
+in your JavaScript classes.
 
 This means it makes the right "on" calls on your class members to subscribe
 the matching event handlers for you automatically.
 All you have to do is
-* let your class inherit from Eventualize
 * name your event handlers appropriately
-* tell your class to eventualize itself
+* eventualize your class
 
 This works in the browser, for example for jQuery elements, or more complex
 UI elements that fire jQuery events:
 
 ```coffeescript
-class ConfirmDialog extends Eventualize
+class ConfirmDialog
 
   constructor: ->
 
@@ -34,7 +33,7 @@ class ConfirmDialog extends Eventualize
     # - @yes_button.on 'click', @on_yes_button_click
     # - @no_button.on 'click', @on_no_button_click
     # - @no_button.on 'hover', @on_no_button_hover
-    @eventualize()
+    eventualize this
 
 
   # Called when the yes_button is clicked.
@@ -49,10 +48,10 @@ class ConfirmDialog extends Eventualize
   @on_no_button_hover: ->
 ```
 
-It also works on the server if you are running Node.js:
+It also works on the server, for example with Node.js:
 
 ```coffeescript
-class Mailer extends Eventualize
+class Mailer
 
   constructor: ->
 
@@ -64,7 +63,7 @@ class Mailer extends Eventualize
     # This is equivalent to
     # - @smtp_gateway.on 'ready', @on_smtp_gateway_ready
     # - @smtp_gateway.on 'error', @on_smtp_gateway_error
-    @eventualize()
+    eventualize this
 
 
   # Called when the SMTP gateway fires the 'ready' event.
