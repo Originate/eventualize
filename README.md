@@ -1,86 +1,80 @@
 # Eventualize [![Build Status](https://travis-ci.org/kevgo/eventualize.png?branch=master)](https://travis-ci.org/kevgo/eventualize)
 
-_Eventualizes your code until it achieves the ultimate eventualization_
+Eventualize introduces a
+convention-over-configuration mechanism for semi-automatically binding
+properly named event handlers
+to jQuery-compatible event sources
+in your object-oriented JavaScript code.
 
-Eventualize is a JavaScript microlibrary that introduces a
-convention-over-configuration pattern so that jQuery-compatible events
-are automatically bound to properly named event handlers
-in your JavaScript classes.
-
-This means it makes the right "on" calls on your class members to subscribe
-the matching event handlers for you automatically.
 All you have to do is
-* name your event handlers appropriately
-* eventualize your class
+* name your event handlers appropriately: `on_[event source]_[event_name]`
+* eventualize your class: `eventualize(this)`
 
-This works in the browser, for example for jQuery elements, or more complex
-UI elements that fire jQuery events:
+This works everywhere where you handle events using JavaScript.
+Here is an example for handling jQuery events in the browser:
 
 ```coffeescript
 class ConfirmDialog
 
   constructor: ->
+    @confirm_button = $('#confirm')
+    @cancel_button = $('#cancel')
 
-    # An example button class that fires "click" events.
-    @yes_button = $('#yes')
-
-    # Another example button class that fires "click" and "hover" events.
-    @no_button = $('#no')
-
-    # Wire up all event listeners in this class.
-    #
+    # Wire up all event listeners that exist in this class.
     # This is equivalent to
-    # - @yes_button.on 'click', @on_yes_button_click
-    # - @no_button.on 'click', @on_no_button_click
-    # - @no_button.on 'hover', @on_no_button_hover
+    # - @confirm_button.on 'click', @on_confirm_button_click
+    # - @cancel_button.on 'click', @on_cancel_button_click
+    # - @cancel_button.on 'hover', @on_cancel_button_hover
     eventualize this
 
 
-  # Called when the yes_button is clicked.
   @on_yes_button_click: ->
+    console.log 'The yes button was clicked'
 
-
-  # Called when the no_button is clicked.
   @on_no_button_click: ->
+    console.log 'The no button was clicked'
 
-
-  # Called when the no_button is hovered.
   @on_no_button_hover: ->
+    console.log 'The no button was hovered'
 ```
 
-It also works on the server, for example with Node.js:
+Eventualize also works on the server, for example with Node.js:
 
 ```coffeescript
-class Mailer
+class Stream
 
   constructor: ->
-
-    # A JavaScript object that can fire 'ready' and 'error' events.
-    @smtp_gateway = new SmtpGateway()
+    @socket = new Socket()
 
     # Wire up all event listeners in this class.
-    #
     # This is equivalent to
-    # - @smtp_gateway.on 'ready', @on_smtp_gateway_ready
-    # - @smtp_gateway.on 'error', @on_smtp_gateway_error
+    # - @socket.on 'open', @on_socket_open
+    # - @socket.on 'data', @on_socket_data
+    # - @socket.on 'error', @on_socket_error
+    # - @socket.on 'close', @on_socket_close
     eventualize this
 
 
-  # Called when the SMTP gateway fires the 'ready' event.
-  @on_smtp_gateway_ready = (err, handle) ->
+  @on_socket_open = (err, handle) ->
+    console.log 'The socket is open'
 
+  @on_socket_data = (err, data) ->
+    console.log 'Received new data'
 
-  # Called when the SMTP gateway fires the 'error' event.
-  @on_smtp_gateway_error = (err, message) ->
+  @on_socket_error = (err, message) ->
+    console.log "Error: #{message}"
+
+  @on_socket_close = (err) ->
+    console.log 'Socket closed'
 ```
 
 
 ## Development
 
-* make a feature request: open an issue on the Github page
+* tell us about an idea for a new feature: https://github.com/kevgo/eventualize/issues
 * praise or feedback: https://github.com/kevgo
-* set up dev environment: `npm install`
+* set up the development environment on your machine: `npm install`
 * run tests: `npm test`
 * compile a new release: `grunt release`
-* contribute some changes: unit-tested pull requests please!  :)
+* contribute some changes: unit-tested pull requests please!  :heart_eyes_cat:
 
