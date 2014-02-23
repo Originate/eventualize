@@ -3,10 +3,14 @@
   "version": "0.0.4",
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
-    "grunt": "latest",
-    "grunt-contrib-clean": "latest",
-    "grunt-contrib-coffee": "latest",
-    "grunt-contrib-uglify": "latest",
+    "coffee-script": "latest",
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "gulp-coffee": "latest",
+    "gulp-coffeelint": "latest",
+    "gulp-concat": "latest",
+    "gulp-header": "latest",
+    "gulp-uglify": "latest",
     "mycha": "latest"
   },
   "main": "lib/eventualize.min.js",
