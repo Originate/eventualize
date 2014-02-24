@@ -5,7 +5,7 @@ concat = require 'gulp-concat'
 header = require 'gulp-header'
 gutil = require 'gulp-util'
 uglify = require 'gulp-uglify'
-pkg = require './package.json'
+pkg = require '../package.json'
 
 
 # The banner on top of the compiled output.
