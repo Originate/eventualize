@@ -5,16 +5,14 @@ concat = require 'gulp-concat'
 header = require 'gulp-header'
 gutil = require 'gulp-util'
 uglify = require 'gulp-uglify'
-pkg = require '../package.json'
 
-
-# The banner on top of the compiled output.
-banner = "/*! #{pkg.name} #{pkg.version},
-          copyright #{new Date().getFullYear()} Kevin Goslar,
-          see #{pkg.homepage} */\n"
 
 
 gulp.task 'default', ->
+  pkg = require '../package.json'
+  banner = "/*! #{pkg.name} #{pkg.version},
+            copyright #{new Date().getFullYear()} Kevin Goslar,
+            see #{pkg.homepage} */\n"
   gulp.src ['./src/eventualize.coffee']
       .pipe coffeelint()
       .pipe coffeelint.reporter()
