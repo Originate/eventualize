@@ -12,11 +12,12 @@ chai.use sinon-chai
 class ButtonClickTester
 
   ->
-    @button = on: sinon.stub()
+    @approve-button = on: sinon.stub()
 
     eventualize this
 
-  on-button-click: ->
+  on-approve-button-click: ->
+  on-approve-button-long-press: ->
 
   other-method: ->
 
@@ -31,11 +32,13 @@ describe 'Eventualize', ->
   describe 'eventualize', (...) ->
 
     it 'binds matching events', ->
-      expect(@button-click-tester.button.on).to.have.been.calledWith 'click',
-                                                                     @button-click-tester.on-button-click
+      expect(@button-click-tester.approve-button.on).to.have.been.calledWith 'click',
+                                                                     @button-click-tester.on-approve-button-click
+      expect(@button-click-tester.approve-button.on).to.have.been.calledWith 'long-press',
+                                                                     @button-click-tester.on-approve-button-long-press
 
     it 'binds each method exactly once', ->
-      expect(@button-click-tester.button.on).to.have.been.calledOnce
+      expect(@button-click-tester.approve-button.on).to.have.been.called-twice
 
 
   describe 'callback-event-name', (...) ->
@@ -55,10 +58,10 @@ describe 'Eventualize', ->
       [@fields, @callbacks] = eventualize.categorize-members @button-click-tester
 
     it 'returns the names of all the fields of the object', ->
-      expect(@fields).to.eql ['button']
+      expect(@fields).to.eql ['approveButton']
 
     it 'returns the names of all the callbacks of the object', ->
-      expect(@callbacks).to.eql ['onButtonClick']
+      expect(@callbacks).to.eql ['onApproveButtonClick', 'onApproveButtonLongPress']
 
     it 'does not return methods that are not callbacks', ->
       expect(@callbacks).to.not.include 'otherMethod'
