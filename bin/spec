@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-DEBUG='*,-express:*,-body-parser:*,-finalhandler,-mocha:*' mocha --compilers ls:LiveScript ./**/*spec.ls
-
+DEBUG='*,-express:*,-body-parser:*,-finalhandler,-mocha:*' mocha --compilers ls:LiveScript ./**/*spec.ls "$@"
