@@ -5,6 +5,7 @@
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
     "chai": "^3.4.1",
+    "david": "^7.0.0",
     "livescript": "^1.4.0",
     "mocha": "^2.3.4",
     "sinon": "^1.17.2",
