@@ -15,7 +15,11 @@
   },
   "main": "lib/eventualize.min.js",
   "scripts": {
-    "test": "mycha run --reporter spec"
+    "postpublish": "git push && git push --tags",
+    "prepublish": "bin/build",
+    "preversion": "npm test && npm run update",
+    "test": "bin/spec",
+    "update": "david update"
   },
   "repository": {
     "type": "git",
