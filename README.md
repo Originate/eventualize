@@ -1,13 +1,15 @@
-# Eventualize [![Build Status](https://travis-ci.org/kevgo/eventualize.png?branch=master)](https://travis-ci.org/kevgo/eventualize)
+# Eventualize [![Build Status](https://travis-ci.org/kevgo/eventualize.svg?branch=master)](https://travis-ci.org/kevgo/eventualize)
 
 Eventualize introduces a
 convention-over-configuration mechanism for semi-automatically binding
-properly named event handlers
-to jQuery-compatible event sources
+properly named
+[EventEmitter](https://nodejs.org/api/events.html)
+or jQuery-compatible event sources
 in your object-oriented JavaScript code.
 
 All you have to do is
-* name your event handlers appropriately: `on_[event source]_[event_name]`
+* make your event handlers methods of a class
+* name your event handlers appropriately: `on[event source][event_name]`
 * eventualize your class: `eventualize(this)`
 
 This works everywhere where you handle events using JavaScript.
@@ -17,28 +19,28 @@ Here is an example for handling jQuery events in the browser:
 class ConfirmDialog
 
   constructor: ->
-    @confirm_button = $('#confirm')
-    @cancel_button = $('#cancel')
+    @confirmButton = $('#confirm')
+    @cancelButton = $('#cancel')
 
     # Wire up all event listeners that exist in this class.
     # This is equivalent to
-    # - @confirm_button.on 'click', @on_confirm_button_click
-    # - @cancel_button.on 'click', @on_cancel_button_click
-    # - @cancel_button.on 'hover', @on_cancel_button_hover
+    # - @confirmButton.on 'click', @onConfirmButtonClick
+    # - @cancelButton.on 'click', @onCancelButtonClick
+    # - @cancelButton.on 'hover', @onCancelButtonHover
     eventualize this
 
 
-  @on_yes_button_click: ->
-    console.log 'The yes button was clicked'
+  @onConfirmButtonClick: ->
+    console.log 'The confirm button was clicked'
 
-  @on_no_button_click: ->
-    console.log 'The no button was clicked'
+  @onCancelButtonClick: ->
+    console.log 'The cancel button was clicked'
 
-  @on_no_button_hover: ->
-    console.log 'The no button was hovered'
+  @onCancelButtonHover: ->
+    console.log 'The cancel button was hovered'
 ```
 
-Eventualize also works on the server, for example with Node.js:
+Eventualize also works for [EventEmitters](https://nodejs.org/api/events.html) in Node.js:
 
 ```coffeescript
 class Stream
@@ -48,23 +50,23 @@ class Stream
 
     # Wire up all event listeners in this class.
     # This is equivalent to
-    # - @socket.on 'open', @on_socket_open
-    # - @socket.on 'data', @on_socket_data
-    # - @socket.on 'error', @on_socket_error
-    # - @socket.on 'close', @on_socket_close
+    # - @socket.on 'open', @onSocketOpen
+    # - @socket.on 'data', @onSocketData
+    # - @socket.on 'error', @onSocketError
+    # - @socket.on 'close', @onSocketClose
     eventualize this
 
 
-  @on_socket_open = (err, handle) ->
+  @onSocketOpen = (err, handle) ->
     console.log 'The socket is open'
 
-  @on_socket_data = (err, data) ->
+  @onSocketData = (err, data) ->
     console.log 'Received new data'
 
-  @on_socket_error = (err, message) ->
+  @onSocketError = (err, message) ->
     console.log "Error: #{message}"
 
-  @on_socket_close = (err) ->
+  @onSocketClose = (err) ->
     console.log 'Socket closed'
 ```
 
