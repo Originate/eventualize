@@ -1,7 +1,9 @@
 # For testing browser-side export behavior.
 global.window = {}
 
-eventualize = require '../src/eventualize'
+require! {
+  '../lib/eventualize'
+}
 
 
 # Helper class for testing.
@@ -103,5 +105,3 @@ describe 'exporting', ->
 
   it "exports the Eventualize class to the browser's window object", ->
     expect(window.eventualize).to.not.be.undefined
-
-
