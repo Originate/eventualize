@@ -1,34 +1,24 @@
 {
   "name": "eventualize",
   "version": "0.0.5",
+  "author": "Kevin Goslar",
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
-    "coffee-script": "latest",
-    "gulp": "latest",
-    "gulp-util": "latest",
-    "gulp-coffee": "latest",
-    "gulp-coffeelint": "latest",
-    "gulp-concat": "latest",
-    "gulp-header": "latest",
-    "gulp-uglify": "latest",
-    "mycha": "latest"
+    "livescript": "^1.4.0",
+    "mocha": "^2.3.4"
   },
+  "homepage": "https://github.com/kevgo/eventualize",
+  "license": "MIT",
   "main": "lib/eventualize.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Originate/eventualize.git"
+  },
   "scripts": {
     "postpublish": "git push && git push --tags",
     "prepublish": "bin/build",
     "preversion": "npm test && npm run update",
     "test": "bin/spec",
     "update": "david update"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:kevgo/eventualize.git"
-  },
-  "author": "Kevin Goslar",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kevgo/eventualize/issues"
-  },
-  "homepage": "https://github.com/kevgo/eventualize"
+  }
 }
