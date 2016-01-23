@@ -23,10 +23,8 @@ eventualize.categorize-members = (obj) ->
   callbacks = []
   for element of obj
     switch typeof obj[element]
-      when 'object'
-        fields.push element
-      when 'function'
-        callbacks.push element if eventualize.is-callback-method element
+      | 'object'    =>  fields.push element
+      | 'function'  =>  callbacks.push element if eventualize.is-callback-method element
   [fields, callbacks]
 
 
