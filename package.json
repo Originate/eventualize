@@ -4,12 +4,15 @@
   "author": "Kevin Goslar",
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
+    "chai": "^3.4.1",
     "livescript": "^1.4.0",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
   },
   "homepage": "https://github.com/kevgo/eventualize",
   "license": "MIT",
-  "main": "lib/eventualize.min.js",
+  "main": "lib/eventualize.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Originate/eventualize.git"
@@ -20,5 +23,9 @@
     "preversion": "npm test && npm run update",
     "test": "bin/spec",
     "update": "david update"
+  },
+  "dependencies": {
+    "decamelize": "^1.1.2",
+    "uppercamelcase": "^1.1.0"
   }
 }

@@ -1,107 +1,82 @@
-# For testing browser-side export behavior.
-global.window = {}
-
 require! {
-  '../lib/eventualize'
+  '..' : eventualize
+  'chai'
+  'sinon'
+  'sinon-chai'
 }
+expect = chai.expect
+chai.use sinon-chai
 
 
 # Helper class for testing.
 class ButtonClickTester
 
-  constructor: ->
+  ->
+    @button = on: sinon.stub()
 
-    # A field.
-    @button =
-      on: sinon.stub()
+    eventualize this
 
-  # An event handler for the 'button' field.
-  on_button_click: ->
+  on-button-click: ->
 
-  # A random other method.
-  other_method: ->
+  other-method: ->
+
 
 
 describe 'Eventualize', ->
 
-  beforeEach ->
-    @button_click_tester = new ButtonClickTester()
+  before-each ->
+    @button-click-tester = new ButtonClickTester()
 
 
-  describe 'eventualize', ->
+  describe 'eventualize', (...) ->
 
-    beforeEach ->
-      eventualize @button_click_tester
-
-    it 'binds events according to their name', ->
-      expect(@button_click_tester.button.on).to.have.been.calledWith 'click',
-                                                                     @button_click_tester.on_button_click
+    it 'binds matching events', ->
+      expect(@button-click-tester.button.on).to.have.been.calledWith 'click',
+                                                                     @button-click-tester.on-button-click
 
     it 'binds each method exactly once', ->
-      expect(@button_click_tester.button.on).to.have.been.calledOnce
+      expect(@button-click-tester.button.on).to.have.been.calledOnce
 
 
-  describe 'callback_event_name', ->
-
-    beforeEach ->
-      @result = eventualize.callback_event_name 'on_button_click', 'button'
+  describe 'callback-event-name', (...) ->
 
     it 'returns the name of the event that the given callback listens to', ->
-      expect(@result).to.equal 'click'
+      result = eventualize.callback-event-name 'onButtonClick', 'button'
+      expect(result).to.equal 'click'
+
+    it 'works for complex names', ->
+      result = eventualize.callback-event-name 'onMyButtonLongPress', 'myButton'
+      expect(result).to.equal 'long-press'
 
 
-  describe 'categorize_members', ->
+  describe 'categorize-members', (...) ->
 
     beforeEach ->
-      [@fields, @callbacks] = eventualize.categorize_members @button_click_tester
+      [@fields, @callbacks] = eventualize.categorize-members @button-click-tester
 
     it 'returns the names of all the fields of the object', ->
       expect(@fields).to.eql ['button']
 
     it 'returns the names of all the callbacks of the object', ->
-      expect(@callbacks).to.eql ['on_button_click']
+      expect(@callbacks).to.eql ['onButtonClick']
 
     it 'does not return methods that are not callbacks', ->
-      expect(@callbacks).to.not.include 'other_method'
+      expect(@callbacks).to.not.include 'otherMethod'
 
 
-  describe 'is_callback_method', ->
+  describe 'is-callback-method', (...) ->
 
     it 'returns TRUE for callback methods', ->
-      expect(eventualize.is_callback_method 'on_foo_click').to.be.true
+      expect(eventualize.is-callback-method 'onFooClick').to.be.true
 
     it 'returns FALSE for methods that are not callbacks', ->
-      expect(eventualize.is_callback_method 'foo_bar').to.be.false
+      expect(eventualize.is-callback-method 'fooBar').to.be.false
 
 
-  describe 'is_callback_for', ->
+  describe 'is-callback-for', (...) ->
 
     it 'returns TRUE if the given method name is for a callback for the given element', ->
-      expect(eventualize.is_callback_for 'on_button_', 'button').to.be.true
+      expect(eventualize.is-callback-for 'onButton', 'button').to.be.true
 
     it 'returns FALSE if the given method name is a callback for a different element', ->
-      expect(eventualize.is_callback_for 'on_foo_', 'button').to.be.false
-
-
-describe 'starts_with', ->
-
-  it 'returns TRUE if the given string starts with the given string', ->
-    expect(eventualize.string_starts_with 'one two three', 'one').to.be.true
-
-  it 'returns TRUE if the given string is equal to the given string', ->
-    expect(eventualize.string_starts_with 'one', 'one').to.be.true
-
-  it 'returns false if the given string does not start with the given string', ->
-    expect(eventualize.string_starts_with 'one two three', 'two').to.be.false
-
-  it 'returns false if the given string does not start with the given string', ->
-    expect(eventualize.string_starts_with 'on', 'one').to.be.false
-
-
-describe 'exporting', ->
-
-  it 'exports the Eventualize class as a Node module', ->
-    expect(eventualize).to.not.be.undefined
-
-  it "exports the Eventualize class to the browser's window object", ->
-    expect(window.eventualize).to.not.be.undefined
+      expect(eventualize.is-callback-for 'onFoo', 'button').to.be.false

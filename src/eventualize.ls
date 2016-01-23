@@ -1,25 +1,28 @@
+require! {
+  'decamelize'
+  'uppercamelcase'
+}
+
+
 # Automatically binds all events fired by properties of this class
-# to their corresponding "on[property name][method name]" methods.
-eventualize = (that) ->
-  [fields, callbacks] = eventualize.categorize-members that
+# to their corresponding "on[property name][method name]" methods
+eventualize = (obj) !->
+  [fields, callbacks] = eventualize.categorize-members obj
   for field in fields
     for callback in callbacks
       if eventualize.is-callback-for callback, field
-        that[field].on eventualize.callback-event-name(callback, field),
-                       that[callback]
-
-  # Prevent inefficient JavaScript.
-  undefined
+        obj[field].on eventualize.callback-event-name(callback, field),
+                       obj[callback]
 
 
-# Returns all the fields and all callbacks of the current instance.
+# Returns all the fields and all callbacks of the current instance
 #
-# Callbacks are methods that begin with 'on'.
-eventualize.categorize-members = (that) ->
+# Callbacks are methods that begin with 'on'
+eventualize.categorize-members = (obj) ->
   fields = []
   callbacks = []
-  for element of that
-    switch typeof that[element]
+  for element of obj
+    switch typeof obj[element]
       when 'object'
         fields.push element
       when 'function'
@@ -27,25 +30,20 @@ eventualize.categorize-members = (that) ->
   [fields, callbacks]
 
 
-# Returns whether the method with the given name is a callback method.
+# Returns whether the method with the given name is a callback method
 eventualize.is-callback-method = (method-name) ->
-  eventualize.string-starts-with method-name, 'on'
+  method-name.starts-with 'on'
 
 
 # Returns whether the method with the given name
-# is a callback for the event with the given name.
+# is a callback for the event with the given name
 eventualize.is-callback-for = (method-name, event-name) ->
-  eventualize.string-starts-with method-name, "on#{event-name}"
+  method-name.starts-with "on#{uppercamelcase event-name}"
 
 
-# Returns the event that the given callback listens to.
+# Returns the event that the given callback listens to
 eventualize.callback-event-name = (callback-name, field) ->
-  callback-name.substring field.length + 4
-
-
-# Returns whether the given string starts with the given string.
-eventualize.string-starts-with = (string, start) ->
-  string.substring(0, start.length) is start
+  decamelize callback-name.substring(field.length + 2), '-'
 
 
 
