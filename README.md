@@ -1,4 +1,4 @@
-# Eventualize [![Build Status](https://travis-ci.org/kevgo/eventualize.svg?branch=master)](https://travis-ci.org/kevgo/eventualize)
+# Eventualize [![Circle CI](https://circleci.com/gh/Originate/eventualize.svg?style=shield)](https://circleci.com/gh/Originate/eventualize)
 
 Eventualize introduces a
 convention-over-configuration mechanism for semi-automatically binding
