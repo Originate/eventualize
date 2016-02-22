@@ -2,13 +2,17 @@
   "name": "eventualize",
   "version": "0.1.0",
   "author": "Kevin Goslar",
+  "dependencies": {
+    "decamelize": "^1.1.2",
+    "uppercamelcase": "^1.1.0"
+  },
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
-    "chai": "^3.4.1",
-    "david": "^7.0.0",
+    "chai": "^3.5.0",
     "livescript": "^1.4.0",
-    "mocha": "^2.3.4",
-    "sinon": "^1.17.2",
+    "mocha": "^2.4.5",
+    "npm-check-updates": "^2.5.8",
+    "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   },
   "files": [
@@ -27,9 +31,5 @@
     "preversion": "npm test && npm run update",
     "test": "bin/spec",
     "update": "david update"
-  },
-  "dependencies": {
-    "decamelize": "^1.1.2",
-    "uppercamelcase": "^1.1.0"
   }
 }
