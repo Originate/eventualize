@@ -1,6 +1,6 @@
 {
   "name": "eventualize",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Kevin Goslar",
   "dependencies": {
     "decamelize": "^1.1.2",
