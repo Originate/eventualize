@@ -11,9 +11,12 @@
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0"
   },
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/kevgo/eventualize",
   "license": "MIT",
-  "main": "lib/eventualize.js",
+  "main": "dist/eventualize.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Originate/eventualize.git"
