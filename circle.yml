@@ -11,7 +11,6 @@ test:
 
   pre:
     - bin/build
-    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
 
   override:
     - bin/lint
