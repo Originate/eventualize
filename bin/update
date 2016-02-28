@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-ncu --upgradeAll
-rm -rf node_modules
-npm i
