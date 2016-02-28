@@ -26,9 +26,7 @@
     "url": "git@github.com:Originate/eventualize.git"
   },
   "scripts": {
-    "postpublish": "git push && git push --tags",
     "prepublish": "bin/build",
-    "preversion": "bin/check-update && bin/spec",
     "test": "bin/spec"
   }
 }
