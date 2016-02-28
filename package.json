@@ -9,6 +9,7 @@
   "description": "A JavaScript microlibrary for automatic event binding",
   "devDependencies": {
     "chai": "3.5.0",
+    "dependency-lint": "3.1.2",
     "livescript": "1.4.0",
     "mocha": "2.4.5",
     "o-tools": "0.1.4",
