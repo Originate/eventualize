@@ -15,3 +15,11 @@ test:
   override:
     - bin/lint
     - mocha --compilers ls:livescript "**/*spec.ls" --reporter mocha-circleci-reporter
+
+
+deployment:
+  publish:
+    branch: release
+    commands:
+      - npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - npm publish
