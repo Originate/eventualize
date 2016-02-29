@@ -17,6 +17,9 @@
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0"
   },
+  "engines": {
+    "npm": ">= 3.0.0"
+  },
   "files": [
     "dist",
     "npm-shrinkwrap.json"
